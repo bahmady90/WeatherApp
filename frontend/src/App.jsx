@@ -45,7 +45,7 @@ function App() {
       setIsLoading(true);
       try{
         console.log(position);
-        const result = await fetch(`http://localhost:4000/getWeather`, {
+        const result = await fetch(`https://backend-tau-plum-79.vercel.app/getWeather`, {
           method: "POST",
           headers: {"Content-type": "application/json"},
           body: JSON.stringify({position: position}),
