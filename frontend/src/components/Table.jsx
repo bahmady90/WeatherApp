@@ -1,9 +1,8 @@
 
 import TableLabel from './TableLabel';
 import Days from "./Days"
-import Input from './Input';
 import TableRow from "./TableRow";
-import TableHeader from "./TableHeader";
+
 
 
 export default function Table({weatherData, handleSetWeatherDayIndex, weatherDayIndex,}) {

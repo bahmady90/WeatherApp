@@ -324,6 +324,7 @@ export function getCountryCode(countryName) {
   return;
 }
 
+//logic to handle in the input ä,ö,ü since in the db its ae, ue, and oa
 export function deUmlaut(value){
   value = value.toLowerCase();
   value = value.replace(/ä/g, 'ae');
