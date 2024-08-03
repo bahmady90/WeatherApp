@@ -33,7 +33,7 @@ app.post("/getWeather", async (req, res) => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "key" : process.env.KEY,
+            "key" : "46b13655b48d444fa0572708242507",
             "Access-Control-Allow-Origin": "*",
           },
         })

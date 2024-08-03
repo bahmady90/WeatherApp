@@ -6,29 +6,18 @@ import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 
 
-export default function Table({weatherData, handleSetWeatherDayIndex, weatherDayIndex,
-  setPosition, position}) {
+export default function Table({weatherData, handleSetWeatherDayIndex, weatherDayIndex,}) {
 
   
   const forecast = weatherData?.forecast?.forecastday;
   
-  const selectedDay = forecast[Number(weatherDayIndex)];
+  const selectedDay = forecast?.at(weatherDayIndex);
   const selectedHour = selectedDay?.hour;
-  const city = weatherData.location.name;
-  const country = weatherData.location.country;
   
-  
-
-  
-
   
   return (
     
   <div className='flex items-center flex-col mt-4'>
-      <div className='mb-4 flex w-50 sm:w-[60%] items-center justify-center flex-col sm:flex-row sm:gap-x-[20%] lg:gap-x-[30%]'>
-        <Input setPosition={setPosition} position={position}/>
-        <TableHeader city={city} selectedDay={selectedDay} country={country}/>
-      </div>
       <Days 
           weatherData={weatherData}
           weatherDayIndex={weatherDayIndex}

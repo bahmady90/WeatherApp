@@ -1,12 +1,13 @@
 import {useState, useEffect} from "react";
 import { getPosition } from "./functions";
 
-
-
 import Loader from "./components/Loader"
 import Table from "./components/Table"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import TableHeader from "./components/TableHeader";
+import Input from "./components/Input";
+import Weather from "./components/Weather"
 
 
 
@@ -17,12 +18,16 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const [weatherDayIndex, setWeatherDayIndex] = useState(0);
   const [position, setPosition] = useState(null);
-  
-  
-    
 
+  const city = weatherData?.location?.name;
+  const country = weatherData?.location?.country;
+  const forecast = weatherData?.forecast?.forecastday;
+  const selectedDay = forecast?.at(weatherDayIndex);
+
+  
   useEffect(function(){
     async function getCoordinates(){
+      setIsLoading(true);
         try{
           const positionObj =  await getPosition();
           const position = {
@@ -30,8 +35,10 @@ function App() {
             long: positionObj.coords.longitude,
           };
           setPosition(position);
+          setIsLoading(false);
         } catch(err){
           console.log(err.message);
+          setIsLoading(false);
         }
         
     }
@@ -40,12 +47,11 @@ function App() {
 
 // fetching the weather-data with the position-object
   useEffect(function(){
-
     async function fetchData(){
       setIsLoading(true);
       try{
         console.log(position);
-        const result = await fetch(`http://localhost:4000/getWeather`, {
+        const result = await fetch(`https://backend-tau-plum-79.vercel.app/getWeather`, {
           method: "POST",
           headers: {"Content-type": "application/json"},
           body: JSON.stringify({position: position}),
@@ -66,29 +72,46 @@ function App() {
   
   
   if(error) return <h1>{error}</h1>
-    if(weatherData.length !== 0) return (
-      <div className="bg-gradient-to-r from-[#d8e9f0] to-[#9bb6c2]">
+    
+      return (
+      <div className="bg-gradient-to-r from-[#d8e9f0] to-[#9bb6c2] h-full">
         <Header/>
         {isloading === true && <div className="w-full h-screen flex items-center justify-center"><Loader/></div>}
-        {(isloading === false && !error) &&
-        <Table 
-          position={position}
-          setPosition={setPosition}
-          weatherData={weatherData}
-          weatherDayIndex={weatherDayIndex}
-          handleSetWeatherDayIndex={setWeatherDayIndex}
+        {isloading === false &&
+        <>
+          <div className=' mb-4 mt-4 flex w-50 sm:w-[100%] items-center justify-center flex-col sm:flex-row sm:gap-x-[10%] lg:gap-x-[10%]'>
+            <Input setPosition={setPosition} position={position}/>
           
-        />
+          {weatherData.length !== 0 &&
+            
+              <TableHeader city={city} selectedDay={selectedDay} country={country}/>
+            
+          }
+          </div>
+          {weatherData.length !== 0 &&
+            <>
+          <Table 
+            position={position}
+            setPosition={setPosition}
+            weatherData={weatherData}
+            weatherDayIndex={weatherDayIndex}
+            handleSetWeatherDayIndex={setWeatherDayIndex}
+            
+          />
+        </>
+          }
+
+          {weatherData.length === 0 && 
+            <Weather/>
+          }
+
+        </>  
         }
         <Footer/>
-        
       </div>  
-    )
-  // if(weatherData.length === 0){
-  //   return <h1>Wir brauchen einen Standort</h1>
-  // }
+      )
 }
 
-export default App
+export default App;
 
 
