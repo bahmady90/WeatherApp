@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getCities } from "../functions"
+import { deUmlaut, getCities } from "../functions"
 
 
 export default function Input({setPosition, position}) {
@@ -9,10 +9,12 @@ export default function Input({setPosition, position}) {
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState(0);
 
+
     async function handleChange(e){
         const input = e.target.value;
-        setInputValue(input);
-        const options = await getCities(input);
+
+        setInputValue(deUmlaut(input));
+        const options = await getCities(deUmlaut(input));
         //Attempt to handle wrong user-input
         if(options.length === 0){
             setError("Keine passende Stadt gefunden");
