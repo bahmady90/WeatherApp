@@ -7,9 +7,9 @@ export default function DateButton({firstPart, dayAndMonths, handleSetWeatherDay
   return (
     <button
         onClick={() => setWeatherDay(index)}
-        className={`${weatherDayIndex === index && "bg-gradient-to-r from-slate-300 to-slate-500"} flex min-w-10 flex-col basis-full before:justify-center items-center  rounded-lg border-black border-[1px] bg-slate-200`}>
+        className={`${weatherDayIndex === index && " bg-gradient-to-r from-slate-300 to-slate-500 min-w-10 z-10 shadow-sm shadow-white text-xl"} border-black border-t-2 flex cursor-pointer min-w-8 flex-col basis-[30%] items-center rounded-xl bg-gray-100 text-lg hover:text-xl `}>
       <p className='font-bold  basis-auto mb-0 '>{firstPart}</p>
-      <p className='text-[15px] mt-0 w-max basis-auto'>{dayAndMonths}</p>
+      <p className='mt-0 w-max basis-auto'>{dayAndMonths}</p>
     </button>
   )
 }

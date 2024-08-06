@@ -11,7 +11,7 @@ export default function Days({weatherData, handleSetWeatherDayIndex, weatherDayI
 
 
   return (
-    <div className='grid pt-1 grid-cols-4 grid-rows-2 w-11/12 sm:w-7/12 gap-1 justify-center items-center rounded-lg rounded-b-none bg-gradient-to-r from-slate-900 to-slate-700'>
+    <div className='flex w-11/12 sm:w-6/12 gap-2 justify-center rounded-3xl rounded-b-none bg-gray-800 px-[1px]'>
       {/* //formatting the the dates to make it more readable */}
       {forecastDays.map((el, index) => {
         const date = new Date(el.date);

@@ -23,25 +23,25 @@ export async function getCities(input){
 export function dayConverter(day){
   switch(day){
     case "Mon":
-      day = "Mo";
+      day = "Montag";
       break;
     case "Tue":
-      day = "Di";
+      day = "Dienstag";
       break;
     case "Wed":
-      day = "Mi";
+      day = "Mittwoch";
       break;
     case "Thu":
-      day = "Do";
+      day = "Donnerstag";
       break;
     case "Fri":
-      day = "Fr";
+      day = "Freitag";
       break;
     case "Sat":
-      day = "Sa";
+      day = "Samstag";
       break;
     case "Sun":
-      day = "So";
+      day = "Sonntag";
       break;
 
   } 

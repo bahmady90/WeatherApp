@@ -57,6 +57,7 @@ function App() {
           body: JSON.stringify({position: position}),
         });
         const data = await result.json();
+        console.log(data);
         setWeatherData(data);
         setIsLoading(false);
       }
@@ -74,12 +75,12 @@ function App() {
   if(error) return <h1>{error}</h1>
     
       return (
-      <div className="bg-gradient-to-r from-[#d8e9f0] to-[#9bb6c2] h-full">
+      <div className="bg-[#f9f9fa] h-full">
         <Header/>
         {isloading === true && <div className="w-full h-screen flex items-center justify-center"><Loader/></div>}
         {isloading === false &&
         <>
-          <div className=' mb-4 mt-4 flex w-50 sm:w-[100%] items-center justify-center flex-col sm:flex-row sm:gap-x-[10%] lg:gap-x-[10%]'>
+          <div className=' z-10 mb-4 mt-4 sm:mb-6 sm:mt-6 flex w-50 sm:w-[100%] items-center justify-center flex-col sm:flex-row sm:gap-x-[10%] lg:gap-x-[10%]'>
             <Input setPosition={setPosition} position={position}/>
           
           {weatherData.length !== 0 &&
@@ -108,8 +109,9 @@ function App() {
         </>  
         }
         <Footer/>
-      </div>  
+      </div> 
       )
+
 }
 
 export default App;

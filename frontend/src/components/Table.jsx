@@ -16,14 +16,13 @@ export default function Table({weatherData, handleSetWeatherDayIndex, weatherDay
   
   return (
     
-  <div className='flex items-center flex-col mt-4'>
+  <div className='flex items-center flex-col mt-4 sm:mt-8'>
       <Days 
           weatherData={weatherData}
           weatherDayIndex={weatherDayIndex}
           handleSetWeatherDayIndex={handleSetWeatherDayIndex}
         />
-      <div className={`w-11/12 sm:w-7/12 rounded-xl  rounded-t-[0px] bg-gradient-to-r from-slate-900 to-slate-700 `}>
-          <div className="text-sm text-center w-full sm:text-base ">
+      <div className="text-sm text-center sm:text-base w-11/12 sm:w-6/12 rounded-xl  rounded-t-[0px] bg-gray-800">
               <TableLabel/>
               <div>
                 {selectedHour.map((hour, index) => 
@@ -39,8 +38,7 @@ export default function Table({weatherData, handleSetWeatherDayIndex, weatherDay
                   </TableRow>
                 )}
               </div>
-          </div>
-      </div>
+        </div>
   </div>
 
   )

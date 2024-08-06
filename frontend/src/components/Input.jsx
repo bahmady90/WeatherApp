@@ -80,7 +80,7 @@ export default function Input({setPosition, position}) {
         
         <form className="flex flex-col mb-4 sm:mb-2 " onSubmit={(e) => handleSubmit(e)}>
         <input 
-            className="w-64 h-12 sm:w-[400px] sm:h-[30px] mb-0 rounded-lg p-1 pl-2 focus:outline-none focus:border-2 focus:border-black focus:border-b-0 bg-gradient-to-r from-slate-50 to-gray-100"
+            className="w-64 h-12 sm:w-[500px] sm:h-[40px] mb-0 rounded-lg p-1 pl-2 focus:outline-none focus:border-black focus:shadow-slate-700 focus:shadow-sm bg-gray-100 border-slate-800 border-[1px] placeholder-gray-700"
             type="text"  value={inputValue} placeholder="Such nach einer Stadt..." 
             onChange={(e) => handleChange(e)} 
             onBlur={(e) => handleBlur(e)}
