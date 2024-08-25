@@ -1,7 +1,6 @@
-import React from 'react'
 
-export default function TableElement({children}) {
+export default function TableElement({children, padding}) {
   return (
-    <div className="px-2 py-4 min-w-10">{children}</div>
+    <div className={`px-${padding} py-4 min-w-10`}>{children}</div>
   )
 }

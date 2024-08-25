@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deUmlaut, getCities } from "../functions"
+import useOutsideClick from "../useOutsideClick";
 
 
 export default function Input({setPosition, position}) {
@@ -9,10 +10,12 @@ export default function Input({setPosition, position}) {
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState(0);
 
+    // logic to close the options-list when the user clicks outside the inputfield
+    const [focusInput, setFocusInput] = useState(false);
+    const ref = useOutsideClick(() => setFocusInput(false));
 
     async function handleChange(e){
         const input = e.target.value;
-
         setInputValue(deUmlaut(input));
         const options = await getCities(deUmlaut(input));
         //Attempt to handle wrong user-input
@@ -22,9 +25,9 @@ export default function Input({setPosition, position}) {
             setInputValue("");
         }
         else{
-            setOptions(options);
-            setError("");
-        }   
+             setOptions(options);
+             setError("");
+            }   
     }
 
     function handleBlur(e){
@@ -77,17 +80,22 @@ export default function Input({setPosition, position}) {
 
   return (
     <>
-        
-        <form className="flex flex-col mb-4 sm:mb-2 " onSubmit={(e) => handleSubmit(e)}>
-        <input 
+        <form 
+            ref={ref} 
+            className="flex flex-col mb-4 sm:mb-2 " 
+            onSubmit={(e) => handleSubmit(e)}
+        >
+        <input
+            onClick={() => setFocusInput(true)}
             className="w-64 h-12 sm:w-[500px] sm:h-[40px] mb-0 rounded-lg p-1 pl-2 focus:outline-none focus:border-black focus:shadow-slate-700 focus:shadow-sm bg-gray-100 border-slate-800 border-[1px] placeholder-gray-700"
             type="text"  value={inputValue} placeholder="Such nach einer Stadt..." 
             onChange={(e) => handleChange(e)} 
             onBlur={(e) => handleBlur(e)}
         />
         {error && <p className="text-red-500 font-semibold mt-2 ml-2">{error}</p>}
-        {options.length > 0 && 
-            <ul id="autocomplete-list" 
+        {(options.length > 0 && focusInput === true) &&
+            <ul 
+                id="autocomplete-list"
                 className=" p-2 text-sm flex flex-col rounded-lg rounded-t-none m-1 mt-0 bg-gradient-to-r from-slate-50 to-gray-100 border-[1px] border-t-0 border-black"
                 >
                 {options.map((option, index) =>{

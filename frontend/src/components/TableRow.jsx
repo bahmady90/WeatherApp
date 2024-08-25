@@ -9,9 +9,9 @@ export default function TableRow({chance_of_rain, chance_of_snow, temp, children
             {children}
         </div>
         <img src={`https:${icon}`} className='w-10 h-10 min-w-10'/>
-        <TableElement>{temp}</TableElement>
-        <TableElement>{chance_of_rain === 0 ? "-" : `${chance_of_rain}%`}</TableElement>
-        <TableElement>{chance_of_snow === 0 ? "-" : `${chance_of_snow}%`}</TableElement>
+        <TableElement padding={2}>{temp}°C</TableElement>
+        <TableElement padding={0}>{chance_of_rain === 0 ? "-" : `${chance_of_rain}%`}</TableElement>
+        <TableElement padding={0}>{chance_of_snow === 0 ? "-" : `${chance_of_snow}%`}</TableElement>
         
     </div>
   )
